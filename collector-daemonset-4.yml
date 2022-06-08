@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: collector
+  namespace: monitoring  
+spec:
+  selector:
+    matchLabels:
+      app: collector
+  template:
+    metadata:
+      labels:
+        app: collector
+    spec:
+      serviceAccount: influxdb
+      containers:
+      - name: collector
+        image: collector:latest
+        imagePullPolicy: Never
